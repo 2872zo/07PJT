@@ -10,7 +10,7 @@
 
 <body>
 
-<form name="updatePurchase" action="/updatePurchaseView.do?tranNo=${purchase.tranNo}" method="post">
+<form name="updatePurchase" action="/purchase/updatePurchaseView" method="post">
 
 다음과 같이 구매가 되었습니다.
 

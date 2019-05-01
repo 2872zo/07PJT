@@ -33,24 +33,23 @@ import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
 
 @Controller
+@RequestMapping("/product/*")
 public class ProductController {
 	@Autowired
 	@Qualifier("productService")
 	ProductService productService;
 
 	@Value("#{commonProperties['pageUnit']}")
-	// @Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 
 	@Value("#{commonProperties['pageSize']}")
-	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 
 	public ProductController() {
 		System.out.println(this.getClass());
 	}
 
-	@RequestMapping("/addProduct.do")
+	@RequestMapping("addProduct")
 	public String addProduct(@ModelAttribute("product") Product product, HttpServletRequest request) throws Exception {
 
 		productService.addProduct(product);
@@ -58,7 +57,7 @@ public class ProductController {
 		return "forward:/product/confirmProduct.jsp";
 	}
 
-	@RequestMapping("/getProduct.do")
+	@RequestMapping("getProduct")
 	public String getProduct(@RequestParam("prodNo") int prodNo, 
 			@RequestParam(value="menu", required=false) String menu,
 			@CookieValue(value = "history", required = false) Cookie cookie,
@@ -68,7 +67,6 @@ public class ProductController {
 		
 		String targetURI = null;
 
-		// ProductService service = new ProductServiceImpl();
 		Product product = productService.getProduct(prodNo);
 
 		// list 형태로 product 전달
@@ -79,7 +77,7 @@ public class ProductController {
 		if (menu == null || menu.equals("search")) {
 			targetURI = "forward:/product/getProduct.jsp";
 		} else if (menu.equals("manage")) {
-			targetURI = "forward:/updateProductView.do";
+			targetURI = "forward:/product/updateProductView";
 		}
 
 		if (cookie == null) {
@@ -96,7 +94,7 @@ public class ProductController {
 		return targetURI;
 	}
 
-	@RequestMapping(value="/listProduct.do",method=RequestMethod.GET)
+	@RequestMapping(value="listProduct",method=RequestMethod.GET)
 	public String getProductList(@RequestParam(value = "page", defaultValue = "1") int currentPage,	Search search,
 									@RequestParam("menu") String menu, Map<String, Object> resultMap,
 									@RequestParam(value="pageSize", defaultValue="0") int pageSize) throws Exception {
@@ -168,7 +166,7 @@ public class ProductController {
 		return "forward:/product/listProduct.jsp";
 	}
 	
-	@RequestMapping(value="/listProduct.do",method=RequestMethod.POST)
+	@RequestMapping(value="listProduct",method=RequestMethod.POST)
 	public String getProductList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,	Search search,
 								Map<String, Object> resultMap,	@RequestParam("menu") String menu,
 								@RequestParam(value="pageSize", defaultValue="0") int pageSize) throws Exception {
@@ -232,7 +230,7 @@ public class ProductController {
 		return "forward:/product/listProduct.jsp";
 	}
 
-	@RequestMapping("/updateProduct.do")
+	@RequestMapping("updateProduct")
 	public String updateProduct(@RequestParam("prodNo") int prodNo, @ModelAttribute Product product,
 			Map<String,String> map,	HttpServletRequest request) throws Exception {
 
@@ -241,10 +239,10 @@ public class ProductController {
 		map.put("prodNo", String.valueOf(prodNo));
 		map.put("menu", "search");
 		
-		return "redirect:/getProduct.do";
+		return "redirect:/product/getProduct";
 	}
 
-	@RequestMapping("/updateProductView.do")
+	@RequestMapping("updateProductView")
 	public String updateProductView(@RequestParam("prodNo") int prodNo, Map<String, Object> map) throws Exception {
 		map.put("product", productService.getProduct(prodNo));
 		
@@ -265,7 +263,7 @@ public class ProductController {
 			//a태그 유무 확인
 			if (!(menu.equals("manage") && productList.get(i).getProTranCode() != null)) {
 				String aTagGetProductStart 
-					= "<a href='/getProduct.do?prodNo=" + productList.get(i).getProdNo() + "&menu=" + menu + "'>";
+					= "<a href='/product/getProduct?prodNo=" + productList.get(i).getProdNo() + "&menu=" + menu + "'>";
 				
 				UnitDetail.add(aTagGetProductStart + productList.get(i).getProdName() + aTagEnd);
 			} else {

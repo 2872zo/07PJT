@@ -18,7 +18,7 @@
 	}
 	
 	function fncUpdatePurchaseCode(currentPage,tranNo){		
-		var URI = "/updateTranCode.do?page="+currentPage+"&tranNo="+tranNo+"&tranCode=3";
+		var URI = "/purchase/updateTranCode?page="+currentPage+"&tranNo="+tranNo+"&tranCode=3";
 		
 		console.log(URI);
 		
@@ -31,7 +31,7 @@
 
 <div style="width: 98%; margin-left: 10px;">
 
-<form name="detailForm" action="/listPurchase.do" method="post">
+<form name="detailForm" action="/purchase/listPurchase" method="post">
 
 <%-- list출력 부분 --%>
 <c:import url="../common/listPrinter.jsp">

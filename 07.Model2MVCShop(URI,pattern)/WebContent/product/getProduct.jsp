@@ -20,7 +20,7 @@ function fncGetAddPurchaseView(prodNo){
 </head>
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm" method="post" action="addPurchaseView.do?">
+<form name="detailForm" method="post" action="/purchase/addPurchaseView?">
 <input type="hidden" name="prodNo" id="prodNo">
 
 <c:import url="../common/getDetail.jsp"/>

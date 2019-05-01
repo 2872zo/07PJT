@@ -77,7 +77,7 @@ function fncHiddingEmptyStock(currentPage, hiddingEmptyStock){
 
 
 function fncResetSearchCondition(){
-	location.href = "/listProduct.do?menu=${param.menu}";
+	location.href = "/product/listProduct?menu=${param.menu}";
 }
 
 
@@ -91,7 +91,7 @@ function fncUpdateTranCodeByProd(currentPage, prodNo){
 		return;
 	}
 	
-	var URI = "/updateTranCodeByProd.do?page=" + currentPage + "&menu=" + "${param.menu}" + "&prodNo=" + prodNo + "&tranCode=2";
+	var URI = "/purchase/updateTranCodeByProd?page=" + currentPage + "&menu=" + "${param.menu}" + "&prodNo=" + prodNo + "&tranCode=2";
 	
 	if("${empty search.searchKeyword}" != "true"){
 		URI += "&searchCondition=" + "${search.searchCondition}" + "&searchKeyword=" + "${search.searchKeyword}";
@@ -108,7 +108,7 @@ function fncUpdateTranCodeByProd(currentPage, prodNo){
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="listProduct.do?" method="post" onsubmit="return false">
+<form name="detailForm" action="/product/listProduct" method="post" onsubmit="return false">
 
 <c:import url="../common/listPrinter.jsp">
 	<c:param name="domainName" value="Product"/>
