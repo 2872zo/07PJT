@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
 <script type="text/javascript">
-
+<!--
 	function fncLogin() {
 		var id=document.loginForm.userId.value;
 		var pw=document.loginForm.password.value;
@@ -29,18 +29,15 @@
 	window.onload = function(){
 		document.getElementById("userId").focus();
 	}
-
+-->
 </script>
 
 </head>
 
 <body bgcolor="#ffffff" text="#000000" >
 
-<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 <form name="loginForm"  method="post" action="/login.do" target="_parent">
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////--> 
- <form name="loginForm"  method="post" action="/user/login" target="_parent">
- 
+
 <div align="center">
 
 <TABLE WITH="100%" HEIGHT="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
@@ -80,7 +77,7 @@
                 	<img src="/images/text_id.gif" width="100" height="30"/>
                 </td>
                 <td height="30">
-                  <input 	type="text" name="userId"  class="ct_input_g" 
+                  <input 	type="text" name="userId" id="userId"  class="ct_input_g" 
                   				style="width:180px; height:19px"  maxLength='50'/>          
           		</td>
                 <td width="20" height="30">&nbsp;</td>
@@ -91,8 +88,9 @@
                 	<img src="/images/text_pas.gif" width="100" height="30"/>
                 </td>
                 <td height="30">                    
-                    <input 	type="password" name="password" class="ct_input_g" 
-                    				style="width:180px; height:19px"  maxLength="50" />
+                    <input 	type="password" name="password" id="password" class="ct_input_g" 
+                    				style="width:180px; height:19px"  maxLength="50"  
+                    				onkeypress="if( event.keyCode==13 ){javascript:fncLogin();}"/>
                 </td>
                 <td width="20" height="30">&nbsp;</td>
               </tr>
@@ -109,15 +107,9 @@
                          </td>
                          <td width="10">&nbsp;</td>
                          <td width="70">
-                         	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                          	<a href="addUserView.jsp;">
                          		<img src="/images/btn_add.gif" width="70" height="20" border="0">
                          	</a>
-                         	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                         	<a href="/user/addUser">
-                         		<img src="/images/btn_add.gif" width="70" height="20" border="0">
-                         	</a>
-                         	
                          </td>
                        </tr>
                      </table>

@@ -9,11 +9,11 @@
 	        
 	        if(dt_datetime == false)
 	        {
-	        	if (str_target.indexOf(".") > 0)
+	        	if (str_target.indexOf("-") > 0)
 	        	{    
-			    	var num1 = str_target.split(".")[0];
-			    	var num2 = str_target.split(".")[1];
-			    	var num3 = str_target.split(".")[2];
+			    	var num1 = str_target.split("-")[0];
+			    	var num2 = str_target.split("-")[1];
+			    	var num3 = str_target.split("-")[2];
 				}
 	        	return document.all(num3).focus();
 	        	
@@ -150,6 +150,7 @@
 		
 		function tuning2dt (str_datetime,str_target)
 		{
+			str_datetime = str_datetime.replace(/-/g,"");
 			var yr = str_datetime.substr(0,4);
 			var mo = str_datetime.substr(4,2);
 			var dy = str_datetime.substr(6,2);
